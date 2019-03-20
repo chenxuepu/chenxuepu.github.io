@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+
+  
+  <title>統計計算-2 | 陳學蒲的學習紀錄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="老師還安排了另一個作業，要我們去對一個函數做0到無限大的積分。 以下是函數 1234g&amp;lt;-function(x)&amp;#123;  y&amp;lt;-exp(-x)*(exp(cos(x^2)))^2  return(y)&amp;#125; 這是這個函數大概的圖形  因為我的function沒辦法處理無限大的情況，所以我就用逼近的方式去逼近這個解。 老師要求誤差要在$10^{-3}$ 以下，我考慮我積分範圍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="統計計算-2">
+<meta property="og:url" content="https://chenxuepu.github.io/2019/03/20/統計計算-2/index.html">
+<meta property="og:site_name" content="陳學蒲的學習紀錄">
+<meta property="og:description" content="老師還安排了另一個作業，要我們去對一個函數做0到無限大的積分。 以下是函數 1234g&amp;lt;-function(x)&amp;#123;  y&amp;lt;-exp(-x)*(exp(cos(x^2)))^2  return(y)&amp;#125; 這是這個函數大概的圖形  因為我的function沒辦法處理無限大的情況，所以我就用逼近的方式去逼近這個解。 老師要求誤差要在$10^{-3}$ 以下，我考慮我積分範圍">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="c:/Users/16110901/chenxuepu/source/images/1.jpg">
+<meta property="og:updated_time" content="2019-03-20T10:38:20.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="統計計算-2">
+<meta name="twitter:description" content="老師還安排了另一個作業，要我們去對一個函數做0到無限大的積分。 以下是函數 1234g&amp;lt;-function(x)&amp;#123;  y&amp;lt;-exp(-x)*(exp(cos(x^2)))^2  return(y)&amp;#125; 這是這個函數大概的圖形  因為我的function沒辦法處理無限大的情況，所以我就用逼近的方式去逼近這個解。 老師要求誤差要在$10^{-3}$ 以下，我考慮我積分範圍">
+<meta name="twitter:image" content="c:/Users/16110901/chenxuepu/source/images/1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="陳學蒲的學習紀錄" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+</html>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">陳學蒲的學習紀錄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chenxuepu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-統計計算-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/20/統計計算-2/" class="article-date">
+  <time datetime="2019-03-20T10:22:42.000Z" itemprop="datePublished">2019-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/統計計算/">統計計算</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      統計計算-2
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>老師還安排了另一個作業，要我們去對一個函數做0到無限大的積分。</p>
+<p>以下是函數</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g&lt;-<span class="keyword">function</span>(x)&#123;</span><br><span class="line">  y&lt;-exp(-x)*(exp(cos(x^<span class="number">2</span>)))^<span class="number">2</span></span><br><span class="line">  <span class="keyword">return</span>(y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這是這個函數大概的圖形</p>
+<p><img src="C:\Users\16110901\chenxuepu\source\images\1.jpg" alt></p>
+<p>因為我的function沒辦法處理無限大的情況，所以我就用逼近的方式去逼近這個解。</p>
+<p>老師要求誤差要在$10^{-3}$ 以下，我考慮我積分範圍後的一單位距離的積分值，如果這個積分值足夠小的話，那誤差應該可以控制在$10^{-3}$ 以下</p>
+<p>積分的方式，我採用上次的Simpson法</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Simpson&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  h&lt;-(b-a)/n</span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==a*n||i==b*n)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*f(i/n)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>((i-a*n)%%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">4</span>*(f(i/n))</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">2</span>*(f(i/n))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這是具體的程式碼</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x&lt;-<span class="number">1</span></span><br><span class="line">b&lt;-<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span>(x&gt;<span class="number">10</span>^(-<span class="number">5</span>))&#123;</span><br><span class="line">  x&lt;-Simpson(g,<span class="number">0</span>,b+<span class="number">1</span>,<span class="number">10</span>^<span class="number">4</span>)-Simpson(g,<span class="number">0</span>,b,<span class="number">10</span>^<span class="number">4</span>)</span><br><span class="line">  b&lt;-b+<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">Simpson(g,<span class="number">0</span>,b+<span class="number">1</span>,<span class="number">10</span>^<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>出來的結果為 $4.720507$  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chenxuepu.github.io/2019/03/20/統計計算-2/" data-id="cjth2qara00006ohugzw4fq93" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/18/統計計算-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">統計計算-1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/統計計算/">統計計算</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/20/統計計算-2/">統計計算-2</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/18/統計計算-1/">統計計算-1</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/18/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 chenxuepu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
