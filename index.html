@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  
+  <title>陳學蒲的學習紀錄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="陳學蒲的學習紀錄">
+<meta property="og:url" content="https://chenxuepu.github.io/index.html">
+<meta property="og:site_name" content="陳學蒲的學習紀錄">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="陳學蒲的學習紀錄">
+  
+    <link rel="alternate" href="/atom.xml" title="陳學蒲的學習紀錄" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">陳學蒲的學習紀錄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chenxuepu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-統計計算-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/20/統計計算-2/" class="article-date">
+  <time datetime="2019-03-20T10:22:42.000Z" itemprop="datePublished">2019-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/統計計算/">統計計算</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/20/統計計算-2/">統計計算-2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>老師還安排了另一個作業，要我們去對一個函數做0到無限大的積分。</p>
+<p>以下是函數</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g&lt;-<span class="keyword">function</span>(x)&#123;</span><br><span class="line">  y&lt;-exp(-x)*(exp(cos(x^<span class="number">2</span>)))^<span class="number">2</span></span><br><span class="line">  <span class="keyword">return</span>(y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這是這個函數大概的圖形</p>
+<p><img src="C:\Users\16110901\chenxuepu\source\images\1.jpg" alt></p>
+<p>因為我的function沒辦法處理無限大的情況，所以我就用逼近的方式去逼近這個解。</p>
+<p>老師要求誤差要在$10^{-3}$ 以下，我考慮我積分範圍後的一單位距離的積分值，如果這個積分值足夠小的話，那誤差應該可以控制在$10^{-3}$ 以下</p>
+<p>積分的方式，我採用上次的Simpson法</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Simpson&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  h&lt;-(b-a)/n</span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==a*n||i==b*n)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*f(i/n)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>((i-a*n)%%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">4</span>*(f(i/n))</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">2</span>*(f(i/n))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這是具體的程式碼</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x&lt;-<span class="number">1</span></span><br><span class="line">b&lt;-<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span>(x&gt;<span class="number">10</span>^(-<span class="number">5</span>))&#123;</span><br><span class="line">  x&lt;-Simpson(g,<span class="number">0</span>,b+<span class="number">1</span>,<span class="number">10</span>^<span class="number">4</span>)-Simpson(g,<span class="number">0</span>,b,<span class="number">10</span>^<span class="number">4</span>)</span><br><span class="line">  b&lt;-b+<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">Simpson(g,<span class="number">0</span>,b+<span class="number">1</span>,<span class="number">10</span>^<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>出來的結果為 $4.720507$  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chenxuepu.github.io/2019/03/20/統計計算-2/" data-id="cjth53lhn0003gwhugnvgmm8u" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-統計計算-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/18/統計計算-1/" class="article-date">
+  <time datetime="2019-03-18T14:07:36.000Z" itemprop="datePublished">2019-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/統計計算/">統計計算</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/18/統計計算-1/">統計計算-1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在統計計算這門課中<br>老師要求我們用R寫一個積分的function<br>老師給我們3個方法<br>一、左右離曼積分<br>二、梯型法<br>三、simpson法<br>以下是我寫的程式<br>一、左右離曼積分<br>以離曼積分的概念作積分，為了方便做計算，就不去找黎曼上和或下和，而是以左或右的f(x)的值作為高</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">integral&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    k&lt;-k+f(i/n)*(<span class="number">1</span>/n)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二、梯型法<br>一樣是離曼積分的概念，不過這次以有左右的f(x)的值作為梯型的上底和下底。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Trapezoid&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    k&lt;-k+(f(i/n)+f((i+<span class="number">1</span>)/n))*(<span class="number">1</span>/n)/<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>三、simpson法<br>我看不太懂這個，我只是照公式寫</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Simpson&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  h&lt;-(b-a)/n</span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==a*n||i==b*n)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*f(i/n)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>((i-a*n)%%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">4</span>*(f(i/n))</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">2</span>*(f(i/n))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>老師給我們的f(x)</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f&lt;- <span class="keyword">function</span>(x)&#123;</span><br><span class="line">  y&lt;-exp(-x^<span class="number">2</span>)</span><br><span class="line">  <span class="keyword">return</span>(y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>積分範圍是0到1 將它分成4,8,16,32等分</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a&lt;-<span class="number">0</span></span><br><span class="line">b&lt;-<span class="number">1</span></span><br><span class="line">x&lt;-c(<span class="number">4</span>,<span class="number">8</span>,<span class="number">16</span>,<span class="number">32</span>)</span><br></pre></td></tr></table></figure>
+<p>老師要我們去算誤差 和不同等分的誤差之間的比值</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">x1&lt;-c()</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:length(x))&#123;</span><br><span class="line">  x1[i]&lt;-integral(f,a,b,x[i])-<span class="number">0.746824132812427</span></span><br><span class="line">&#125;</span><br><span class="line">x11&lt;-c(<span class="literal">NA</span>)</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">2</span>:length(x))&#123;</span><br><span class="line">  x11[i]&lt;-x1[i-<span class="number">1</span>]/x1[i]</span><br><span class="line">&#125;</span><br><span class="line">x2&lt;-c()</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:length(x))&#123;</span><br><span class="line">  x2[i]&lt;-Trapezoid(f,a,b,x[i])-<span class="number">0.746824132812427</span></span><br><span class="line">&#125;</span><br><span class="line">x21&lt;-c(<span class="literal">NA</span>)</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">2</span>:length(x))&#123;</span><br><span class="line">  x21[i]&lt;-x2[i-<span class="number">1</span>]/x2[i]</span><br><span class="line">&#125;</span><br><span class="line">x3&lt;-c()</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:length(x))&#123;</span><br><span class="line">  x3[i]&lt;-Simpson(f,a,b,x[i])-<span class="number">0.746824132812427</span></span><br><span class="line">&#125;</span><br><span class="line">x31&lt;-c(<span class="literal">NA</span>)</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">2</span>:length(x))&#123;</span><br><span class="line">  x31[i]&lt;-x3[i-<span class="number">1</span>]/x3[i]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">c&lt;-matrix(c(x,x1,x11,x2,x21,x3,x31),nrow=<span class="number">4</span>, ncol=<span class="number">7</span>)</span><br><span class="line">View(c)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>$I_{R_{n}}$</th>
+<th></th>
+<th>$I_{T_{n}}$</th>
+<th></th>
+<th>$I_{S_{n}}$</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>error</td>
+<td>ratio</td>
+<td>error</td>
+<td>ratio</td>
+<td>error</td>
+<td>ratio</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.16714490</td>
+<td></td>
+<td>0.06834632</td>
+<td></td>
+<td>3.124698e-05</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>0.08453395</td>
+<td>1.977252</td>
+<td>0.03966288</td>
+<td>1.723181</td>
+<td>1.987715e-06</td>
+<td>15.72005</td>
+</tr>
+<tr>
+<td>16</td>
+<td>0.04250670</td>
+<td>1.988721</td>
+<td>0.02136253</td>
+<td>1.856656</td>
+<td>1.246233e-07</td>
+<td>15.94979</td>
+</tr>
+<tr>
+<td>32</td>
+<td>0.02131324</td>
+<td>1.994380</td>
+<td>0.01108282</td>
+<td>1.927535</td>
+<td>7.794558e-09</td>
+<td>15.98850</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chenxuepu.github.io/2019/03/18/統計計算-1/" data-id="cjth53lh90000gwhuhvyx498e" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/18/hello-world/" class="article-date">
+  <time datetime="2019-03-18T13:53:59.812Z" itemprop="datePublished">2019-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/18/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chenxuepu.github.io/2019/03/18/hello-world/" data-id="cjth53lhh0001gwhuc5oqiorx" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/統計計算/">統計計算</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/20/統計計算-2/">統計計算-2</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/18/統計計算-1/">統計計算-1</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/18/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 chenxuepu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
