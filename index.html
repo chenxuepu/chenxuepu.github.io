@@ -104,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/03/20/統計計算-2/" data-id="cjth2qara00006ohugzw4fq93" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/03/20/統計計算-2/" data-id="cjth3sj4h0001z0hu36t9plsg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -216,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/03/18/統計計算-1/" data-id="cjth2qarj00016ohuwrpzpw8n" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/03/18/統計計算-1/" data-id="cjth3sj4k0002z0hue0eu0bvo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/03/18/hello-world/" data-id="cjth2qaro00036ohu8hb2m4vm" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/03/18/hello-world/" data-id="cjth3sj490000z0huj8d4lb2g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -358,9 +358,24 @@
 
 
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </div>
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -372,9 +387,10 @@
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
 </body>
 </html>

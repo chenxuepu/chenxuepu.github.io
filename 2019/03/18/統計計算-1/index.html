@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="陳學蒲的學習紀錄">
 <meta property="og:description" content="在統計計算這門課中老師要求我們用R寫一個積分的function老師給我們3個方法一、左右離曼積分二、梯型法三、simpson法以下是我寫的程式一、左右離曼積分以離曼積分的概念作積分，為了方便做計算，就不去找黎曼上和或下和，而是以左或右的f(x)的值作為高 12345678integral&amp;lt;-function(f,a,b,n)&amp;#123;  k&amp;lt;-0  n&amp;lt;-n/(b-a)  fo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-20T10:27:06.554Z">
+<meta property="og:updated_time" content="2019-03-20T11:04:15.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="統計計算-1">
 <meta name="twitter:description" content="在統計計算這門課中老師要求我們用R寫一個積分的function老師給我們3個方法一、左右離曼積分二、梯型法三、simpson法以下是我寫的程式一、左右離曼積分以離曼積分的概念作積分，為了方便做計算，就不去找黎曼上和或下和，而是以左或右的f(x)的值作為高 12345678integral&amp;lt;-function(f,a,b,n)&amp;#123;  k&amp;lt;-0  n&amp;lt;-n/(b-a)  fo">
@@ -166,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/03/18/統計計算-1/" data-id="cjth2qarj00016ohuwrpzpw8n" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/03/18/統計計算-1/" data-id="cjth3sj4k0002z0hue0eu0bvo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -280,9 +280,24 @@
 
 
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </div>
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -294,9 +309,10 @@
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
 </body>
 </html>

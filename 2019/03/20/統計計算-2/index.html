@@ -15,7 +15,7 @@
 <meta property="og:description" content="老師還安排了另一個作業，要我們去對一個函數做0到無限大的積分。 以下是函數 1234g&amp;lt;-function(x)&amp;#123;  y&amp;lt;-exp(-x)*(exp(cos(x^2)))^2  return(y)&amp;#125; 這是這個函數大概的圖形  因為我的function沒辦法處理無限大的情況，所以我就用逼近的方式去逼近這個解。 老師要求誤差要在$10^{-3}$ 以下，我考慮我積分範圍">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="c:/Users/16110901/chenxuepu/source/images/1.jpg">
-<meta property="og:updated_time" content="2019-03-20T10:38:20.479Z">
+<meta property="og:updated_time" content="2019-03-20T11:04:09.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="統計計算-2">
 <meta name="twitter:description" content="老師還安排了另一個作業，要我們去對一個函數做0到無限大的積分。 以下是函數 1234g&amp;lt;-function(x)&amp;#123;  y&amp;lt;-exp(-x)*(exp(cos(x^2)))^2  return(y)&amp;#125; 這是這個函數大概的圖形  因為我的function沒辦法處理無限大的情況，所以我就用逼近的方式去逼近這個解。 老師要求誤差要在$10^{-3}$ 以下，我考慮我積分範圍">
@@ -108,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/03/20/統計計算-2/" data-id="cjth2qara00006ohugzw4fq93" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/03/20/統計計算-2/" data-id="cjth3sj4h0001z0hu36t9plsg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -213,9 +213,24 @@
 
 
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </div>
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -227,9 +242,10 @@
   });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
 </body>
 </html>
