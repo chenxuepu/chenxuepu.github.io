@@ -95,7 +95,7 @@
 <p>因為我的function沒辦法處理無限大的情況，所以我就用逼近的方式去逼近這個解。</p>
 <p>老師要求誤差要在$10^{-3}$ 以下，我考慮我積分範圍後的一單位距離的積分值，如果這個積分值足夠小的話，那誤差應該可以控制在$10^{-3}$ 以下</p>
 <p>積分的方式，我採用上次的Simpson法</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Simpson&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  h&lt;-(b-a)/n</span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==a*n||i==b*n)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*f(i/n)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>((i-a*n)%%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">4</span>*(f(i/n))</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">2</span>*(f(i/n))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Simpson&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  h&lt;-(b-a)/n</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">0</span>:n)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==<span class="number">0</span>||i==n)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*f(a+i*h)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(i%%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">4</span>*(f(a+i*h))</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">2</span>*(f(a+i*h))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>這是具體的程式碼</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x&lt;-<span class="number">1</span></span><br><span class="line">b&lt;-<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span>(x&gt;<span class="number">10</span>^(-<span class="number">5</span>))&#123;</span><br><span class="line">  x&lt;-Simpson(g,<span class="number">0</span>,b+<span class="number">1</span>,<span class="number">10</span>^<span class="number">4</span>)-Simpson(g,<span class="number">0</span>,b,<span class="number">10</span>^<span class="number">4</span>)</span><br><span class="line">  b&lt;-b+<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">Simpson(g,<span class="number">0</span>,b+<span class="number">1</span>,<span class="number">10</span>^<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
 <p>出來的結果為 $4.720507$  </p>
@@ -103,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/03/20/統計計算-2/" data-id="cjth5a6cq0002f0huqehi8itk" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/03/20/統計計算-2/" data-id="cjtiejb370004h8hu0bgbrl5c" class="article-share-link">Share</a>
       
       
       
@@ -141,12 +141,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在統計計算這門課中<br>老師要求我們用R寫一個積分的function<br>老師給我們3個方法<br>一、左右離曼積分<br>二、梯型法<br>三、simpson法<br>以下是我寫的程式<br>一、左右離曼積分<br>以離曼積分的概念作積分，為了方便做計算，就不去找黎曼上和或下和，而是以左或右的$f(x)$的值作為高</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">integral&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    k&lt;-k+f(i/n)*(<span class="number">1</span>/n)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>在統計計算這門課中<br>老師要求我們用R寫一個積分的function<br>老師給我們3個方法<br>一、左右離曼積分<br>二、梯型法<br>三、simpson法<br>以下是我寫的程式<br>一、左右離曼積分<br>以離曼積分的概念作積分，為了方便做計算，就不去找黎曼上和或下和，而是以左或右的$f(x)​$的值作為高</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">integral&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  m&lt;-(b-a)/n</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:n)&#123;</span><br><span class="line">    k&lt;-k+f(a+i*m)*(<span class="number">1</span>/n)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>二、梯型法<br>一樣是離曼積分的概念，不過這次以有左右的$f(x)​$的值作為梯型的上底和下底。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Trapezoid&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    k&lt;-k+(f(i/n)+f((i+<span class="number">1</span>)/n))*(<span class="number">1</span>/n)/<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Trapezoid&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  m&lt;-(b-a)/n</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:n)&#123;</span><br><span class="line">    k&lt;-k+(f(a+i*m)+f(a+(i-<span class="number">1</span>)*m))*(<span class="number">1</span>/n)/<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>三、simpson法<br>我看不太懂這個，我只是照公式寫</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Simpson&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  h&lt;-(b-a)/n</span><br><span class="line">  n&lt;-n/(b-a)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> (a*n):(b*n))&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==a*n||i==b*n)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*f(i/n)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>((i-a*n)%%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">4</span>*(f(i/n))</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">2</span>*(f(i/n))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Simpson&lt;-<span class="keyword">function</span>(f,a,b,n)&#123;</span><br><span class="line">  k&lt;-<span class="number">0</span></span><br><span class="line">  h&lt;-(b-a)/n</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">0</span>:n)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==<span class="number">0</span>||i==n)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*f(a+i*h)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(i%%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">4</span>*(f(a+i*h))</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      k&lt;-k+(h/<span class="number">3</span>)*<span class="number">2</span>*(f(a+i*h))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>老師給我們的$f(x)$</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f&lt;- <span class="keyword">function</span>(x)&#123;</span><br><span class="line">  y&lt;-exp(-x^<span class="number">2</span>)</span><br><span class="line">  <span class="keyword">return</span>(y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>積分範圍是$(0,1)$ 將它分成4,8,16,32等分</p>
@@ -177,37 +177,37 @@
 </tr>
 <tr>
 <td>4</td>
-<td>0.16714490</td>
+<td>-0.082855105</td>
 <td></td>
-<td>0.06834632</td>
+<td>-3.840035e-03</td>
 <td></td>
 <td>3.124698e-05</td>
 <td></td>
 </tr>
 <tr>
 <td>8</td>
-<td>0.08453395</td>
-<td>1.977252</td>
-<td>0.03966288</td>
-<td>1.723181</td>
+<td>-0.040466053</td>
+<td>2.047521</td>
+<td>-9.585180e-04</td>
+<td>4.006221</td>
 <td>1.987715e-06</td>
 <td>15.72005</td>
 </tr>
 <tr>
 <td>16</td>
-<td>0.04250670</td>
-<td>1.988721</td>
-<td>0.02136253</td>
-<td>1.856656</td>
+<td>-0.019993303</td>
+<td>2.023980</td>
+<td>-2.395360e-04</td>
+<td>4.001561</td>
 <td>1.246233e-07</td>
 <td>15.94979</td>
 </tr>
 <tr>
 <td>32</td>
-<td>0.02131324</td>
-<td>1.994380</td>
-<td>0.01108282</td>
-<td>1.927535</td>
+<td>-0.009936762</td>
+<td>2.012054</td>
+<td>-5.987816e-05</td>
+<td>4.000391</td>
 <td>7.794558e-09</td>
 <td>15.98850</td>
 </tr>
@@ -217,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/03/18/統計計算-1/" data-id="cjth5a6cj0001f0hugs9cvo3x" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/03/18/統計計算-1/" data-id="cjtiejb2e0000h8hun4c8dfwo" class="article-share-link">Share</a>
       
       
       
@@ -264,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/03/18/hello-world/" data-id="cjth5a6cb0000f0huti4lffjt" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/03/18/hello-world/" data-id="cjtiejb2k0001h8hufhdn42nq" class="article-share-link">Share</a>
       
       
       
