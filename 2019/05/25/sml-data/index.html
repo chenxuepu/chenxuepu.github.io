@@ -13,17 +13,17 @@
 <meta property="og:site_name" content="陳學蒲的學習紀錄">
 <meta property="og:description" content="資料來自kaggle https://www.kaggle.com/open-powerlifting/powerlifting-database 主要內容是深蹲，長凳和硬拉三種舉重項目的成績以及選手的數據 數據來源是比賽的紀錄，所以應該是observational study 我們希望可以用選手的一些資料，來預測它們舉重的成績。 先看一下原始資料 總共有1,423,354筆資料，37個變數 完整">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-1.png">
-<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-2.png">
-<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-3.png">
-<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-4.png">
-<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-5.png">
-<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-6.png">
-<meta property="og:updated_time" content="2019-05-25T15:59:12.654Z">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/unnamed-chunk-3-1.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/unnamed-chunk-3-2.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/unnamed-chunk-3-3.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/unnamed-chunk-3-4.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/unnamed-chunk-3-5.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/unnamed-chunk-3-6.png">
+<meta property="og:updated_time" content="2019-05-25T16:29:29.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sml-data">
 <meta name="twitter:description" content="資料來自kaggle https://www.kaggle.com/open-powerlifting/powerlifting-database 主要內容是深蹲，長凳和硬拉三種舉重項目的成績以及選手的數據 數據來源是比賽的紀錄，所以應該是observational study 我們希望可以用選手的一些資料，來預測它們舉重的成績。 先看一下原始資料 總共有1,423,354筆資料，37個變數 完整">
-<meta name="twitter:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-1.png">
+<meta name="twitter:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/unnamed-chunk-3-1.png">
   
     <link rel="alternate" href="/atom.xml" title="陳學蒲的學習紀錄" type="application/atom+xml">
   
@@ -312,17 +312,17 @@
 ##  Max.   :1367.5  
 ##  NA&apos;s   :44784
 </code></pre><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$Age)</span><br></pre></td></tr></table></figure>
-<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-1.png" alt></p>
+<p><img src="/2019/05/25/sml-data/unnamed-chunk-3-1.png" alt></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$BodyweightKg)</span><br></pre></td></tr></table></figure>
-<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-2.png" alt></p>
+<p><img src="/2019/05/25/sml-data/unnamed-chunk-3-2.png" alt></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$Best3SquatKg)</span><br></pre></td></tr></table></figure>
-<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-3.png" alt></p>
+<p><img src="/2019/05/25/sml-data/unnamed-chunk-3-3.png" alt></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$Best3BenchKg)</span><br></pre></td></tr></table></figure>
-<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-4.png" alt></p>
+<p><img src="/2019/05/25/sml-data/unnamed-chunk-3-4.png" alt></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$Best3DeadliftKg)</span><br></pre></td></tr></table></figure>
-<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-5.png" alt></p>
+<p><img src="/2019/05/25/sml-data/unnamed-chunk-3-5.png" alt></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$TotalKg)</span><br></pre></td></tr></table></figure>
-<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-6.png" alt></p>
+<p><img src="/2019/05/25/sml-data/unnamed-chunk-3-6.png" alt></p>
 <p>因為男女的成績可能有不一樣的情況 所以將資料依男女分成兩份 因為我們想預測的有4種，所以將資料再作了一點處理</p>
 <p>這些資料，請移步: <a href="https://chenxuepu.github.io/2019/05/25/sml-data-show/">https://chenxuepu.github.io/2019/05/25/sml-data-show/</a></p>
 <p>完整資料: <a href="https://chenxuepu.github.io/2019/05/25/sml-data-show-big/">https://chenxuepu.github.io/2019/05/25/sml-data-show-big/</a></p>
@@ -331,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenxuepu.github.io/2019/05/25/sml-data/" data-id="cjw3ptcmp0009eghudnvcns9c" class="article-share-link">Share</a>
+      <a data-url="https://chenxuepu.github.io/2019/05/25/sml-data/" data-id="cjw3qli8w000aukhu45r8sins" class="article-share-link">Share</a>
       
       
       
