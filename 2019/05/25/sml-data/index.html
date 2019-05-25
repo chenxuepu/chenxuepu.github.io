@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  
+  <title>sml-data | 陳學蒲的學習紀錄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="資料來自kaggle https://www.kaggle.com/open-powerlifting/powerlifting-database 主要內容是深蹲，長凳和硬拉三種舉重項目的成績以及選手的數據 數據來源是比賽的紀錄，所以應該是observational study 我們希望可以用選手的一些資料，來預測它們舉重的成績。 先看一下原始資料 總共有1,423,354筆資料，37個變數 完整">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sml-data">
+<meta property="og:url" content="https://chenxuepu.github.io/2019/05/25/sml-data/index.html">
+<meta property="og:site_name" content="陳學蒲的學習紀錄">
+<meta property="og:description" content="資料來自kaggle https://www.kaggle.com/open-powerlifting/powerlifting-database 主要內容是深蹲，長凳和硬拉三種舉重項目的成績以及選手的數據 數據來源是比賽的紀錄，所以應該是observational study 我們希望可以用選手的一些資料，來預測它們舉重的成績。 先看一下原始資料 總共有1,423,354筆資料，37個變數 完整">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-1.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-2.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-3.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-4.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-5.png">
+<meta property="og:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-6.png">
+<meta property="og:updated_time" content="2019-05-25T15:59:12.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sml-data">
+<meta name="twitter:description" content="資料來自kaggle https://www.kaggle.com/open-powerlifting/powerlifting-database 主要內容是深蹲，長凳和硬拉三種舉重項目的成績以及選手的數據 數據來源是比賽的紀錄，所以應該是observational study 我們希望可以用選手的一些資料，來預測它們舉重的成績。 先看一下原始資料 總共有1,423,354筆資料，37個變數 完整">
+<meta name="twitter:image" content="https://chenxuepu.github.io/2019/05/25/sml-data/sml-data_files/figure-markdown_github/unnamed-chunk-3-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="陳學蒲的學習紀錄" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">陳學蒲的學習紀錄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chenxuepu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-sml-data" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/25/sml-data/" class="article-date">
+  <time datetime="2019-05-25T14:00:00.000Z" itemprop="datePublished">2019-05-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/機器學習/">機器學習</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sml-data
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>資料來自kaggle <a href="https://www.kaggle.com/open-powerlifting/powerlifting-database" target="_blank" rel="noopener">https://www.kaggle.com/open-powerlifting/powerlifting-database</a></p>
+<p>主要內容是深蹲，長凳和硬拉三種舉重項目的成績以及選手的數據</p>
+<p>數據來源是比賽的紀錄，所以應該是observational study</p>
+<p>我們希望可以用選手的一些資料，來預測它們舉重的成績。</p>
+<p>先看一下原始資料 總共有1,423,354筆資料，37個變數</p>
+<p>完整資料請移步: <a href="https://chenxuepu.github.io/2019/05/25/sml-Original-data/">https://chenxuepu.github.io/2019/05/25/sml-Original-data/</a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(data,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>##                Name Sex Event Equipment Age AgeClass Division BodyweightKg
+## 1      Abbie Murphy   F   SBD     Wraps  29    24-34     F-OR         59.8
+## 2       Abbie Tuong   F   SBD     Wraps  29    24-34     F-OR         58.5
+## 3    Ainslee Hooper   F     B       Raw  40    40-44     F-OR         55.4
+## 4   Amy Moldenhauer   F   SBD     Wraps  23    20-23     F-OR           60
+## 5      Andrea Rowan   F   SBD     Wraps  45    45-49     F-OR          104
+## 6     April Alvarez   F   SBD     Wraps  37    35-39     F-OR           74
+## 7        Ash Morgan   F   SBD     Wraps  23    20-23     F-OR         59.8
+## 8   Belinda Moloney   F   SBD     Wraps  35    35-39     F-OR         80.4
+## 9   Briony Williams   F   SBD     Wraps  36    35-39     F-OR          108
+## 10 Brooke Kowalczyk   F   SBD     Wraps  37    35-39     F-OR         74.8
+##    WeightClassKg Squat1Kg Squat2Kg Squat3Kg Squat4Kg Best3SquatKg Bench1Kg
+## 1             60     80.0     92.5    105.0       NA        105.0     45.0
+## 2             60    100.0    110.0    120.0       NA        120.0     55.0
+## 3             56       NA       NA       NA       NA           NA     27.5
+## 4             60   -105.0   -105.0    105.0       NA        105.0     67.5
+## 5            110    120.0    130.0    140.0       NA        140.0     70.0
+## 6             75    127.5    135.0    142.5       NA        142.5     72.5
+## 7             60    115.0    125.0   -135.0       NA        125.0     65.0
+## 8           82.5    120.0    130.0    140.0       NA        140.0     67.5
+## 9            110    180.0    200.0    220.0       NA        220.0     90.0
+## 10            75    180.0    190.0    200.0       NA        200.0     90.0
+##    Bench2Kg Bench3Kg Bench4Kg Best3BenchKg Deadlift1Kg Deadlift2Kg
+## 1      50.0     55.0       NA         55.0       110.0         120
+## 2      62.5     67.5       NA         67.5       130.0         140
+## 3      32.5    -35.0       NA         32.5          NA          NA
+## 4      72.5    -75.0       NA         72.5       132.5        -140
+## 5      75.0     80.0       NA         80.0       150.0         160
+## 6      77.5     82.5       NA         82.5       125.0         135
+## 7      70.0    -75.0       NA         70.0       130.0         140
+## 8      72.5     77.5       NA         77.5       125.0         140
+## 9     100.0       NA       NA        100.0       200.0          NA
+## 10     95.0    -97.5       NA         95.0       160.0         170
+##    Deadlift3Kg Deadlift4Kg Best3DeadliftKg TotalKg Place  Wilks McCulloch
+## 1        130.0          NA           130.0     290     4 324.16    324.16
+## 2        145.0          NA           145.0   332.5     2 378.07    378.07
+## 3           NA          NA              NA    32.5     1  38.56     38.56
+## 4       -140.0          NA           132.5     310     3 345.61    345.61
+## 5        170.0          NA           170.0     390     3 321.25    338.91
+## 6        145.0          NA           145.0     370     5 354.74    354.74
+## 7        150.0          NA           150.0     345     1 385.63    385.63
+## 8        152.5          NA           152.5     370     5 337.62    337.62
+## 9           NA          NA           200.0     520     1 424.49    424.49
+## 10       180.0          NA           180.0     475     1 452.31    452.31
+##    Glossbrenner IPFPoints Tested Country Federation       Date MeetCountry
+## 1        286.42    511.15                   GPC-AUS 2018-10-27   Australia
+## 2        334.16    595.65                   GPC-AUS 2018-10-27   Australia
+## 3         34.12    313.97                   GPC-AUS 2018-10-27   Australia
+## 4        305.37    547.04                   GPC-AUS 2018-10-27   Australia
+## 5        274.56    550.08                   GPC-AUS 2018-10-27   Australia
+## 6        312.20    596.18                   GPC-AUS 2018-10-27   Australia
+## 7        340.74    612.23                   GPC-AUS 2018-10-27   Australia
+## 8        296.00    575.85                   GPC-AUS 2018-10-27   Australia
+## 9        361.57    716.65                   GPC-AUS 2018-10-27   Australia
+## 10       397.92    762.42                   GPC-AUS 2018-10-27   Australia
+##    MeetState      MeetName
+## 1        VIC Melbourne Cup
+## 2        VIC Melbourne Cup
+## 3        VIC Melbourne Cup
+## 4        VIC Melbourne Cup
+## 5        VIC Melbourne Cup
+## 6        VIC Melbourne Cup
+## 7        VIC Melbourne Cup
+## 8        VIC Melbourne Cup
+## 9        VIC Melbourne Cup
+## 10       VIC Melbourne Cup
+</code></pre><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary(data)</span><br></pre></td></tr></table></figure>
+<pre><code>##                   Name          Sex              Event        
+##  Alan Aerts         :    214   B  :   1652   SBD    :1071572  
+##  Jose Hernandez     :    204   BD :      6   B      : 255527  
+##  Sverre Paulsen     :    191   D  :      6   D      :  56711  
+##  Erik Rasmussen     :    186   F  : 362535   BD     :  27592  
+##  Bonnie Aerts       :    165   M  :1057490   S      :   4900  
+##  Zbyn\xc4 Krej\xc4:    154   SBD:   1665   SB     :   2371  
+##  (Other)            :1422240                 (Other):   4681  
+##       Equipment           Age            AgeClass           Division     
+##  Single-ply:785878          :665827          :636399   Open     :336308  
+##  Raw       :465360   17.5   : 22875   24-34  :243571   Boys     :280232  
+##  Wraps     :103734   22.5   : 22397   20-23  :136444   Girls    :118968  
+##  Multi-ply : 65035   21.5   : 21369   35-39  : 65971   Juniors  : 50242  
+##            :   155   18.5   : 20478   18-19  : 63807   MR-O     : 29618  
+##  17.5      :   121   20.5   : 19881   40-44  : 63520   Masters 1: 27000  
+##  (Other)   :  3071   (Other):650527   (Other):213642   (Other)  :580986  
+##   BodyweightKg     WeightClassKg       Squat1Kg          Squat2Kg      
+##  90     :  23409   90     :103125   Min.   :-555.0    Min.   :-580.0   
+##  82.5   :  22464   75     : 96959   1st Qu.:  90.0    1st Qu.:  67.5   
+##  75     :  21544   100    : 94965   Median : 147.5    Median : 145.0   
+##  100    :  20539   82.5   : 87449   Mean   : 114.0    Mean   :  91.8   
+##  67.5   :  17530   110    : 69735   3rd Qu.: 200.0    3rd Qu.: 205.0   
+##         :  16728   67.5   : 65282   Max.   : 555.0    Max.   : 567.0   
+##  (Other):1301140   (Other):905839   NA&apos;s   :1085785   NA&apos;s   :1090016  
+##     Squat3Kg          Squat4Kg        Best3SquatKg       Bench1Kg     
+##  Min.   :-600.5    Min.   :-550.0    Min.   :-477.5   Min.   :-480.0  
+##  1st Qu.:-167.5    1st Qu.:  82.5    1st Qu.: 122.5   1st Qu.:  57.5  
+##  Median : 110.0    Median : 145.0    Median : 167.8   Median : 105.0  
+##  Mean   :  30.2    Mean   :  97.3    Mean   : 173.8   Mean   :  83.7  
+##  3rd Qu.: 192.5    3rd Qu.: 200.0    3rd Qu.: 215.5   3rd Qu.: 145.0  
+##  Max.   : 560.0    Max.   : 505.5    Max.   : 575.0   Max.   : 467.5  
+##  NA&apos;s   :1100978   NA&apos;s   :1418080   NA&apos;s   :390520   NA&apos;s   :923588  
+##     Bench2Kg         Bench3Kg         Bench4Kg        Best3BenchKg    
+##  Min.   :-507.5   Min.   :-575.0   Min.   :-500.0    Min.   :-522.50  
+##  1st Qu.: -52.5   1st Qu.:-140.0   1st Qu.: -81.7    1st Qu.:  74.84  
+##  Median :  95.0   Median : -60.0   Median :  97.5    Median : 111.13  
+##  Mean   :  54.7   Mean   : -18.5   Mean   :  47.6    Mean   : 116.57  
+##  3rd Qu.: 145.0   3rd Qu.: 117.5   3rd Qu.: 152.5    3rd Qu.: 150.00  
+##  Max.   : 487.5   Max.   : 478.5   Max.   : 487.6    Max.   : 488.50  
+##  NA&apos;s   :929902   NA&apos;s   :947754   NA&apos;s   :1410807   NA&apos;s   :148787   
+##   Deadlift1Kg       Deadlift2Kg       Deadlift3Kg       Deadlift4Kg     
+##  Min.   :-461.0    Min.   :-470.0    Min.   :-587.5    Min.   :-461.0   
+##  1st Qu.: 125.0    1st Qu.: 115.0    1st Qu.:-210.0    1st Qu.:  90.0   
+##  Median : 180.0    Median : 177.5    Median : 117.5    Median : 150.0   
+##  Mean   : 162.6    Mean   : 129.7    Mean   :  13.1    Mean   :  92.8   
+##  3rd Qu.: 226.8    3rd Qu.: 230.0    3rd Qu.: 205.0    3rd Qu.: 210.0   
+##  Max.   : 450.0    Max.   : 460.4    Max.   : 457.5    Max.   : 418.0   
+##  NA&apos;s   :1059832   NA&apos;s   :1067365   NA&apos;s   :1084805   NA&apos;s   :1412553  
+##  Best3DeadliftKg     TotalKg            Place            Wilks       
+##  Min.   :-410.0          : 109894   1      :541179   Min.   :  1.47  
+##  1st Qu.: 138.3   150    :   7082   2      :212924   1st Qu.:197.90  
+##  Median : 185.0   160    :   6986   3      :134065   Median :305.23  
+##  Mean   : 187.5   170    :   6624   DQ     : 99581   Mean   :288.27  
+##  3rd Qu.: 230.5   200    :   6596   4      : 94343   3rd Qu.:374.61  
+##  Max.   : 845.0   140    :   6410   5      : 70663   Max.   :779.38  
+##  NA&apos;s   :340053   (Other):1279762   (Other):270599   NA&apos;s   :118947  
+##    McCulloch       Glossbrenner      IPFPoints       Tested       
+##  Min.   :  1.47   Min.   :  1.41          : 149787      : 332786  
+##  1st Qu.:204.79   1st Qu.:183.90   Yes    :   3324   Yes:1090568  
+##  Median :311.96   Median :286.31   491.92 :    183                
+##  Mean   :296.00   Mean   :272.58   524.12 :    170                
+##  3rd Qu.:383.68   3rd Qu.:355.80   491.52 :    169                
+##  Max.   :804.40   Max.   :885.65   516.86 :    165                
+##  NA&apos;s   :119100   NA&apos;s   :118954   (Other):1269556                
+##       Country          Federation             Date        
+##           :1031141   THSPA  :290547   2017-02-18:   7001  
+##  USA      :  91333   THSWPA :120208   2017-01-21:   6527  
+##  Russia   :  45263   USAPL  :117494   2018-02-17:   6432  
+##  Ukraine  :  27545   USPA   : 81941   2019-02-16:   6302  
+##  Finland  :  21066   USPF   : 39693   2016-01-23:   6267  
+##  Australia:  17016   IPF    : 38737   2019-02-09:   6102  
+##  (Other)  : 189990   (Other):734734   (Other)   :1384723  
+##     MeetCountry       MeetState     
+##  USA      :856561          :478480  
+##  Russia   : 84180   TX     :448753  
+##  Ukraine  : 48871   CA     : 47760  
+##  Canada   : 46586   FL     : 31513  
+##  Australia: 40777   OH     : 27611  
+##  Norway   : 35328   PA     : 22975  
+##  (Other)  :311051   (Other):366262  
+##                             MeetName      
+##  World Championships            :  32615  
+##  European Championships         :  14621  
+##  Nationals                      :   7846  
+##  World Cup                      :   7447  
+##  Raw Nationals                  :   6578  
+##  World Bench Press Championships:   6357  
+##  (Other)                        :1347890
+</code></pre><p>在資料中，有很多的變數是我們不需要的，所以我們將需要的資料留下來，其他的通通捨去。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Leave&lt;-c(<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">14</span>,<span class="number">19</span>,<span class="number">24</span>,<span class="number">25</span>)</span><br><span class="line">data2&lt;-data[,Leave]</span><br><span class="line"></span><br><span class="line">summary(data2)</span><br></pre></td></tr></table></figure>
+<pre><code>##   Sex               Equipment           Age            AgeClass     
+##  B  :   1652   Single-ply:785878          :665827          :636399  
+##  BD :      6   Raw       :465360   17.5   : 22875   24-34  :243571  
+##  D  :      6   Wraps     :103734   22.5   : 22397   20-23  :136444  
+##  F  : 362535   Multi-ply : 65035   21.5   : 21369   35-39  : 65971  
+##  M  :1057490             :   155   18.5   : 20478   18-19  : 63807  
+##  SBD:   1665   17.5      :   121   20.5   : 19881   40-44  : 63520  
+##                (Other)   :  3071   (Other):650527   (Other):213642  
+##   BodyweightKg      Best3SquatKg     Best3BenchKg     Best3DeadliftKg 
+##  90     :  23409   Min.   :-477.5   Min.   :-522.50   Min.   :-410.0  
+##  82.5   :  22464   1st Qu.: 122.5   1st Qu.:  74.84   1st Qu.: 138.3  
+##  75     :  21544   Median : 167.8   Median : 111.13   Median : 185.0  
+##  100    :  20539   Mean   : 173.8   Mean   : 116.57   Mean   : 187.5  
+##  67.5   :  17530   3rd Qu.: 215.5   3rd Qu.: 150.00   3rd Qu.: 230.5  
+##         :  16728   Max.   : 575.0   Max.   : 488.50   Max.   : 845.0  
+##  (Other):1301140   NA&apos;s   :390520   NA&apos;s   :148787    NA&apos;s   :340053  
+##     TotalKg       
+##         : 109894  
+##  150    :   7082  
+##  160    :   6986  
+##  170    :   6624  
+##  200    :   6596  
+##  140    :   6410  
+##  (Other):1279762
+</code></pre><p>在資料中，我們感興趣的變數總共有9個 分別是 “Sex”:選手的性別，資料中有些許錯誤，在下面會進行修正。 “Equipment”:裝備，有無配戴裝備對成績有很大的影響。<br>“Age”:選手的年齡，最小有0歲的，不知道是怎麼回事。 “AgeClass”:選手的年齡分區，不過分得很亂，所以下面我將它們重新分類 “BodyweightKg”:選手的體重。 “Best3SquatKg”:深蹲的舉重成績，這是我們想要預測的其中一項。<br>“Best3BenchKg”:長凳的舉重成績，這是我們想要預測的其中一項。<br>“Best3DeadliftKg”:硬拉的舉重成績，這是我們想要預測的其中一項。<br>“TotalKg”:上面三項的和，這是我們想要預測的其中一項。</p>
+<p>初步處理後的資料，請移步: <a href="https://chenxuepu.github.io/2019/05/25/sml-Original-data/#%E5%88%9D%E6%AD%A5%E8%99%95%E7%90%86%E5%BE%8C%E7%9A%84%E8%B3%87%E6%96%99">https://chenxuepu.github.io/2019/05/25/sml-Original-data/#%E5%88%9D%E6%AD%A5%E8%99%95%E7%90%86%E5%BE%8C%E7%9A%84%E8%B3%87%E6%96%99</a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">data2&lt;-data2[which(data2$Sex==<span class="string">"F"</span>|data2$Sex==<span class="string">"M"</span>),]</span><br><span class="line">data2$Sex&lt;-as.factor(as.character(data2$Sex))</span><br><span class="line">data2$Equipment&lt;-as.factor(as.character(data2$Equipment))</span><br><span class="line">data2&lt;-data2[-which(data2$Age==<span class="string">""</span>),]</span><br><span class="line">data2&lt;-data2[-which(data2$BodyweightKg==<span class="string">""</span>),]</span><br><span class="line">data2$Age&lt;-as.numeric(as.character(data2$Age))</span><br><span class="line">data2$BodyweightKg&lt;-as.numeric(as.character(data2$BodyweightKg))</span><br><span class="line">data2$TotalKg&lt;-as.numeric(as.character(data2$TotalKg))</span><br><span class="line">data2[,<span class="number">4</span>]&lt;-<span class="literal">NA</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">4</span>&amp;data2$Age&gt;=<span class="number">0</span>),<span class="number">4</span>]&lt;-<span class="string">"0-4"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">9</span>&amp;data2$Age&gt;=<span class="number">5</span>),<span class="number">4</span>]&lt;-<span class="string">"5-9"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">14</span>&amp;data2$Age&gt;=<span class="number">10</span>),<span class="number">4</span>]&lt;-<span class="string">"10-14"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">19</span>&amp;data2$Age&gt;=<span class="number">15</span>),<span class="number">4</span>]&lt;-<span class="string">"15-19"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">24</span>&amp;data2$Age&gt;=<span class="number">20</span>),<span class="number">4</span>]&lt;-<span class="string">"20-24"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">29</span>&amp;data2$Age&gt;=<span class="number">25</span>),<span class="number">4</span>]&lt;-<span class="string">"25-29"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">34</span>&amp;data2$Age&gt;=<span class="number">30</span>),<span class="number">4</span>]&lt;-<span class="string">"30-34"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">39</span>&amp;data2$Age&gt;=<span class="number">35</span>),<span class="number">4</span>]&lt;-<span class="string">"35-39"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">44</span>&amp;data2$Age&gt;=<span class="number">40</span>),<span class="number">4</span>]&lt;-<span class="string">"40-44"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">49</span>&amp;data2$Age&gt;=<span class="number">45</span>),<span class="number">4</span>]&lt;-<span class="string">"45-49"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">54</span>&amp;data2$Age&gt;=<span class="number">50</span>),<span class="number">4</span>]&lt;-<span class="string">"50-54"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">59</span>&amp;data2$Age&gt;=<span class="number">55</span>),<span class="number">4</span>]&lt;-<span class="string">"55-59"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">64</span>&amp;data2$Age&gt;=<span class="number">60</span>),<span class="number">4</span>]&lt;-<span class="string">"60-64"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">69</span>&amp;data2$Age&gt;=<span class="number">65</span>),<span class="number">4</span>]&lt;-<span class="string">"65-69"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">74</span>&amp;data2$Age&gt;=<span class="number">70</span>),<span class="number">4</span>]&lt;-<span class="string">"70-74"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">79</span>&amp;data2$Age&gt;=<span class="number">75</span>),<span class="number">4</span>]&lt;-<span class="string">"75-79"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">84</span>&amp;data2$Age&gt;=<span class="number">80</span>),<span class="number">4</span>]&lt;-<span class="string">"80-84"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">89</span>&amp;data2$Age&gt;=<span class="number">85</span>),<span class="number">4</span>]&lt;-<span class="string">"85-89"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">94</span>&amp;data2$Age&gt;=<span class="number">90</span>),<span class="number">4</span>]&lt;-<span class="string">"90-94"</span></span><br><span class="line">data2[which(data2$Age&lt;=<span class="number">99</span>&amp;data2$Age&gt;=<span class="number">95</span>),<span class="number">4</span>]&lt;-<span class="string">"95-99"</span></span><br><span class="line">data2$AgeClass&lt;-as.factor(data2$AgeClass)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">summary(data2)</span><br></pre></td></tr></table></figure>
+<pre><code>##  Sex             Equipment           Age           AgeClass     
+##  F:191337   Multi-ply : 44001   Min.   : 0.00   20-24  :138927  
+##  M:559580   Raw       :364471   1st Qu.:21.00   15-19  :111381  
+##             Single-ply:264608   Median :28.00   25-29  :104649  
+##             Straps    :    12   Mean   :31.47   30-34  : 76844  
+##             Wraps     : 77825   3rd Qu.:40.00   35-39  : 57547  
+##                                 Max.   :97.00   (Other):184231  
+##                                                 NA&apos;s   : 77338  
+##   BodyweightKg     Best3SquatKg     Best3BenchKg    Best3DeadliftKg 
+##  Min.   : 15.88   Min.   :-477.5   Min.   :-522.5   Min.   :-410.0  
+##  1st Qu.: 67.50   1st Qu.: 130.0   1st Qu.:  85.0   1st Qu.: 150.0  
+##  Median : 82.50   Median : 182.5   Median : 125.0   Median : 205.0  
+##  Mean   : 85.56   Mean   : 186.8   Mean   : 128.4   Mean   : 202.2  
+##  3rd Qu.: 99.70   3rd Qu.: 235.0   3rd Qu.: 165.0   3rd Qu.: 250.0  
+##  Max.   :258.00   Max.   : 575.0   Max.   : 488.5   Max.   : 457.5  
+##                   NA&apos;s   :265894   NA&apos;s   :77049    NA&apos;s   :215559  
+##     TotalKg      
+##  Min.   :   5.0  
+##  1st Qu.: 200.0  
+##  Median : 367.5  
+##  Mean   : 396.2  
+##  3rd Qu.: 569.3  
+##  Max.   :1367.5  
+##  NA&apos;s   :44784
+</code></pre><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$Age)</span><br></pre></td></tr></table></figure>
+<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-1.png" alt></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$BodyweightKg)</span><br></pre></td></tr></table></figure>
+<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-2.png" alt></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$Best3SquatKg)</span><br></pre></td></tr></table></figure>
+<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-3.png" alt></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$Best3BenchKg)</span><br></pre></td></tr></table></figure>
+<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-4.png" alt></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$Best3DeadliftKg)</span><br></pre></td></tr></table></figure>
+<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-5.png" alt></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(data2$TotalKg)</span><br></pre></td></tr></table></figure>
+<p><img src="sml-data_files/figure-markdown_github/unnamed-chunk-3-6.png" alt></p>
+<p>因為男女的成績可能有不一樣的情況 所以將資料依男女分成兩份 因為我們想預測的有4種，所以將資料再作了一點處理</p>
+<p>這些資料，請移步: <a href="https://chenxuepu.github.io/2019/05/25/sml-data-show/">https://chenxuepu.github.io/2019/05/25/sml-data-show/</a></p>
+<p>完整資料: <a href="https://chenxuepu.github.io/2019/05/25/sml-data-show-big/">https://chenxuepu.github.io/2019/05/25/sml-data-show-big/</a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">data.f&lt;-data2[which(data2$Sex==<span class="string">"F"</span>),]</span><br><span class="line">data.m&lt;-data2[which(data2$Sex==<span class="string">"M"</span>),]</span><br><span class="line"></span><br><span class="line">data.f.Squat&lt;-data.f[-which(is.na(data.f$Best3SquatKg)),]</span><br><span class="line">data.m.Squat&lt;-data.m[-which(is.na(data.m$Best3SquatKg)),]</span><br><span class="line">data.f.Squat&lt;-data.f.Squat[which(data.f.Squat$Best3SquatKg&gt;<span class="number">0</span>),]</span><br><span class="line">data.m.Squat&lt;-data.m.Squat[which(data.m.Squat$Best3SquatKg&gt;<span class="number">0</span>),]</span><br><span class="line"></span><br><span class="line">data.f.Bench&lt;-data.f[-which(is.na(data.f$Best3BenchKg)),]</span><br><span class="line">data.m.Bench&lt;-data.m[-which(is.na(data.m$Best3BenchKg)),]</span><br><span class="line">data.f.Bench&lt;-data.f.Bench[which(data.f.Bench$Best3BenchKg&gt;<span class="number">0</span>),]</span><br><span class="line">data.m.Bench&lt;-data.m.Bench[which(data.m.Bench$Best3BenchKg&gt;<span class="number">0</span>),]</span><br><span class="line"></span><br><span class="line">data.f.Deadlift&lt;-data.f[-which(is.na(data.f$Best3DeadliftKg)),]</span><br><span class="line">data.m.Deadlift&lt;-data.m[-which(is.na(data.m$Best3DeadliftKg)),]</span><br><span class="line">data.f.Deadlift&lt;-data.f.Deadlift[which(data.f.Deadlift$Best3DeadliftKg&gt;<span class="number">0</span>),]</span><br><span class="line">data.m.Deadlift&lt;-data.m.Deadlift[which(data.m.Deadlift$Best3DeadliftKg&gt;<span class="number">0</span>),]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data.f.SBD&lt;-data.f.Squat[-which(is.na(data.f.Squat$Best3BenchKg)),]</span><br><span class="line">data.f.SBD&lt;-data.f.SBD[-which(is.na(data.f.SBD$Best3DeadliftKg)),]</span><br><span class="line">data.f.SBD&lt;-data.f.SBD[which(data.f.SBD$Best3BenchKg&gt;<span class="number">0</span>),]</span><br><span class="line">data.f.SBD&lt;-data.f.SBD[which(data.f.SBD$Best3DeadliftKg&gt;<span class="number">0</span>),]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data.m.SBD&lt;-data.m.Squat[-which(is.na(data.m.Squat$Best3BenchKg)),]</span><br><span class="line">data.m.SBD&lt;-data.m.SBD[-which(is.na(data.m.SBD$Best3DeadliftKg)),]</span><br><span class="line">data.m.SBD&lt;-data.m.SBD[which(data.m.SBD$Best3BenchKg&gt;<span class="number">0</span>),]</span><br><span class="line">data.m.SBD&lt;-data.m.SBD[which(data.m.SBD$Best3DeadliftKg&gt;<span class="number">0</span>),]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chenxuepu.github.io/2019/05/25/sml-data/" data-id="cjw3ptcmp0009eghudnvcns9c" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/25/sml-data-show/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">sml-data-show</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/機器學習/">機器學習</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/統計計算/">統計計算</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/25/sml-data/">sml-data</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/25/sml-data-show/">sml-data-show</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/25/sml-Original-data/">sml-Original-data</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/25/sml-data-show-big/">sml-data-show-big</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/29/機器學習-1/">機器學習-1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 chenxuepu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
